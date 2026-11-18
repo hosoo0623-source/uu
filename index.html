@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parfum — Elevate everyday moments to extraordinary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=sentient@300,301,400,401&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --light-pink: #fff0f7;
+    --white: #fff;
+    --black: #000;
+    --green: #abb249;
+    --orange: #e8a94c;
+    --red: #dd6249;
+
+    --space-xxxs: 4px;
+    --space-xxs: 8px;
+    --space-s: 12px;
+    --space-m: 16px;
+    --space-l: 24px;
+    --space-xl: 32px;
+    --space-xxl: 40px;
+    --space-xxxl: 80px;
+
+    --page-padding: 40px;
+    --section-padding: 80px;
+    --gutters: 32px;
+    --radius: 16px;
+
+    --font-display: 'Sentient', Georgia, 'Times New Roman', serif;
+    --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--light-pink);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4, h5, p { margin: 0; }
+
+  /* Type styles */
+  .h1 { font-family: var(--font-display); font-weight: 300; font-size: 80px; line-height: 1; }
+  .h2 { font-family: var(--font-display); font-weight: 300; font-size: 40px; line-height: 1.2; }
+  .h3 { font-family: var(--font-display); font-weight: 300; font-size: 32px; line-height: 1.2; }
+  .h4 { font-family: var(--font-display); font-weight: 300; font-size: 24px; line-height: 1.2; }
+  .h5 { font-family: var(--font-display); font-weight: 300; font-size: 20px; line-height: 1.2; }
+  .h1 em, .h2 em, .h3 em, .h4 em { font-style: italic; }
+  .accent {
+    font-family: var(--font-body); font-weight: 700; font-size: 12px; line-height: 1.4;
+    letter-spacing: 1.2px; text-transform: uppercase;
+  }
+  .small { font-size: 14px; }
+
+  /* Page frame */
+  .page { position: relative; max-width: 1440px; margin: 0 auto; }
+
+  /* Button */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: var(--space-s) var(--space-l);
+    border: 0; border-radius: var(--space-xl);
+    background: var(--green); color: var(--black);
+    cursor: pointer; text-align: center; white-space: nowrap;
+    transition: filter .2s ease, transform .2s ease;
+  }
+  .btn:hover { filter: brightness(.95); }
+  .btn:active { transform: translateY(1px); }
+  .btn:focus-visible, a:focus-visible, input:focus-visible, .icon-btn:focus-visible {
+    outline: 2px solid var(--black); outline-offset: 2px;
+  }
+  .btn--white { background: var(--white); }
+  .btn--block { width: 100%; }
+
+  .icon-btn { border: 0; background: none; padding: 0; cursor: pointer; line-height: 0; }
+
+  /* Announcement banner */
+  .announcement {
+    position: relative; height: 40px; background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .announcement a { text-decoration: underline; }
+  .announcement .icon-btn { position: absolute; right: 40px; top: 8px; }
+  .announcement[hidden] { display: none; }
+
+  /* Navigation */
+  .nav {
+    position: absolute; z-index: 5; top: 64px; left: var(--page-padding); right: var(--page-padding);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 17px var(--page-padding);
+    background: var(--white); border-radius: var(--space-xxxl);
+  }
+  .nav__group { display: flex; align-items: center; gap: var(--space-l); }
+  .nav__logo { position: absolute; left: 50%; top: 17px; transform: translateX(-50%); width: 142px; height: 25px; }
+  .nav__logo img { width: 100%; height: 100%; }
+  .nav a:hover { opacity: .6; }
+
+  /* Hero */
+  .hero { position: relative; height: 768px; display: flex; align-items: center; justify-content: center; }
+  .hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.1); }
+  .hero__content {
+    position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;
+    gap: var(--space-l); width: 768px; max-width: 100%; text-align: center; color: var(--white);
+    margin-top: -16px;
+  }
+
+  /* Featured logos */
+  .logos {
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-xxl);
+    padding: var(--section-padding) var(--page-padding) 0;
+  }
+  .logos img { width: 1018px; max-width: 100%; height: auto; aspect-ratio: 1018 / 32; }
+
+  /* Featured products */
+  .products { padding: var(--section-padding) var(--page-padding); display: flex; flex-direction: column; gap: var(--space-xxl); }
+  .products__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gutters); }
+  .card { position: relative; display: flex; flex-direction: column; align-items: center; gap: var(--space-s); }
+  .card__img { width: 100%; aspect-ratio: 316 / 421; border-radius: var(--radius); object-fit: cover; }
+  .card__meta { display: flex; flex-direction: column; align-items: center; gap: var(--space-s); text-align: center; width: 100%; }
+  .card__title { display: flex; flex-direction: column; gap: var(--space-xxxs); width: 100%; }
+  .badge {
+    position: absolute; top: 12px; right: 12px;
+    padding: var(--space-xxs) var(--space-m);
+    background: var(--orange); border-radius: 999px;
+  }
+
+  /* Image with text */
+  .feature {
+    display: flex; align-items: center; justify-content: center; gap: var(--space-xl);
+    padding: var(--section-padding) var(--page-padding);
+  }
+  .feature > * { flex: 1 1 0; min-width: 0; }
+  .feature__img { width: 100%; aspect-ratio: 664 / 738; border-radius: var(--radius); object-fit: cover; }
+  .feature__text { display: flex; justify-content: center; }
+  .feature__inner { width: 368px; max-width: 100%; display: flex; flex-direction: column; align-items: stretch; gap: var(--space-xxl); text-align: center; }
+
+  /* Marquee */
+  .marquee { background: var(--orange); overflow: hidden; padding: var(--space-m) 0; }
+  .marquee__track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+  .marquee__set { display: flex; align-items: center; gap: var(--space-xxl); padding-right: var(--space-xxl); flex-shrink: 0; }
+  .marquee__set p { white-space: nowrap; text-align: center; }
+  .marquee__set img { width: 40px; height: 40px; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track { animation: none; width: 100%; justify-content: center; }
+    .marquee__set[aria-hidden="true"] { display: none; }
+  }
+
+  /* Icons section */
+  .icons {
+    display: flex; align-items: flex-end; justify-content: center; gap: var(--gutters);
+    padding: var(--section-padding) var(--page-padding);
+  }
+  .icons > * { flex: 1 1 0; min-width: 0; }
+  .icons__text { display: flex; flex-direction: column; gap: var(--space-xxl); }
+  .icons__grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 34px; row-gap: var(--space-xxl); max-width: 664px; }
+  .icons__item { display: flex; flex-direction: column; gap: var(--space-s); }
+  .icons__item img { width: 40px; height: 40px; }
+
+  /* Testimonials */
+  .testimonials {
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-xxl);
+    padding: var(--section-padding) var(--page-padding);
+  }
+  .testimonials h2 { text-align: center; max-width: 768px; }
+  .testimonials__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutters); width: 100%; }
+  .testimonial {
+    display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-l);
+    min-height: 266px; padding: var(--space-xxl);
+    background: var(--white); border-radius: var(--radius);
+  }
+  .stars { display: flex; gap: var(--space-xxxs); margin-bottom: var(--space-m); }
+  .stars img { width: 24px; height: 24px; }
+  .testimonial__author { display: flex; align-items: center; gap: var(--space-s); }
+  .testimonial__author img { width: 48px; height: 48px; border-radius: 50%; }
+  .testimonial__author div { display: flex; flex-direction: column; }
+  .slider-controls { display: flex; align-items: center; justify-content: center; gap: var(--space-m); }
+  .slider-controls img { width: 48px; height: 48px; }
+
+  /* Footer */
+  .footer {
+    width: calc(100% - 2 * var(--page-padding)); max-width: 1360px; margin: 0 auto var(--space-xxl);
+    padding: var(--section-padding) var(--page-padding);
+    background: var(--red); color: var(--white); border-radius: var(--radius);
+    display: flex; flex-direction: column; gap: var(--space-xxxl);
+  }
+  .footer__top { display: flex; justify-content: space-between; gap: var(--space-xl); }
+  .footer__brand { display: flex; flex-direction: column; gap: var(--space-xxl); width: 43.2%; }
+  .footer__brand > img { width: 44px; height: 44px; }
+  .footer__news { display: flex; flex-direction: column; gap: var(--space-l); }
+  .footer__news h3 em { font-weight: 400; font-size: 36px; }
+  .signup { display: flex; align-items: center; gap: var(--space-xxs); }
+  .signup__field {
+    position: relative; width: 366px; max-width: 100%; height: 38px; flex: 0 1 366px;
+    background: url("assets/vector.svg") center / 100% 100% no-repeat;
+  }
+  .signup__field input {
+    width: 100%; height: 100%; padding: 0 var(--space-m); border: 0; background: transparent;
+    font: inherit; color: var(--black);
+  }
+  .signup__field input::placeholder { color: var(--black); opacity: 1; }
+  .footer__cols { display: flex; justify-content: flex-end; gap: var(--gutters); width: 42.05%; }
+  .footer__col { display: flex; flex-direction: column; gap: var(--space-l); }
+  .footer__col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-xxxs); min-width: 127px; }
+  .footer a:hover { text-decoration: underline; }
+  .footer__wordmark { width: 100%; height: auto; aspect-ratio: 1280 / 225; }
+  .footer__bottom { display: flex; justify-content: space-between; gap: var(--space-m); }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .h1 { font-size: 56px; }
+    .products__grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials__list { grid-template-columns: 1fr; }
+    .footer__top { flex-direction: column; }
+    .footer__brand, .footer__cols { width: 100%; justify-content: flex-start; }
+  }
+  @media (max-width: 760px) {
+    :root { --page-padding: 20px; --section-padding: 48px; }
+    .h1 { font-size: 40px; }
+    .h2 { font-size: 32px; }
+    .nav { top: 52px; padding: 17px var(--space-l); }
+    .nav__logo { width: 110px; height: auto; }
+    .hero { height: 640px; }
+    .products__grid { grid-template-columns: 1fr; }
+    .feature, .icons { flex-direction: column; align-items: stretch; }
+    .feature__text { order: 2; }
+    .icons__grid { grid-template-columns: 1fr; }
+    .announcement a { font-size: 12px; padding: 0 48px; text-align: center; }
+    .announcement .icon-btn { right: 12px; }
+    .footer__bottom { flex-direction: column; }
+    .signup { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Announcement banner -->
+  <div class="announcement small" id="announcement">
+    <a href="#products">Just Restocked | Shop Our Fragrance Collection</a>
+    <button class="icon-btn" type="button" aria-label="Dismiss announcement" id="announcement-close">
+      <img src="assets/icon-cancel.svg" alt="" width="24" height="24">
+    </button>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" role="banner">
+    <nav class="nav__group accent" aria-label="Primary">
+      <a href="#products">Shop</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="nav__logo" href="/" aria-label="Parfum home"><img src="assets/nav-logo.svg" alt="Parfum"></a>
+    <div class="nav__group accent">
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+      <a href="#cart" aria-label="Shopping bag"><img src="assets/icon-shopping-bag.svg" alt="" width="24" height="24"></a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <img class="hero__bg" src="assets/hero.png" alt="">
+      <div class="hero__content">
+        <h1 class="h1">Elevate <em>everyday</em> moments to <em>extraordinary</em>.</h1>
+        <a class="btn btn--white accent" href="#products">Shop our&nbsp; fragrances</a>
+      </div>
+    </section>
+
+    <!-- Featured logos -->
+    <section class="logos" aria-label="As seen in">
+      <p class="accent">As seen in</p>
+      <img src="assets/featured-logos.svg" alt="Featured in Flow, Nino, InTrend, June, ZNE and Max" width="1018" height="32">
+    </section>
+
+    <!-- Featured products -->
+    <section class="products" id="products">
+      <h2 class="h2">Featured <em>fragrances</em>.</h2>
+      <div class="products__grid">
+        <article class="card">
+          <img class="card__img" src="assets/product-meadow.png" alt="Meadow perfume bottle">
+          <div class="card__meta">
+            <div class="card__title">
+              <h3 class="h5">Meadow</h3>
+              <p class="accent">Breezy &amp; Joyful</p>
+            </div>
+            <p class="small">$39.95</p>
+          </div>
+          <a class="btn btn--block accent" href="#">Shop now</a>
+          <span class="badge accent">On sale</span>
+        </article>
+        <article class="card">
+          <img class="card__img" src="assets/product-jardinea.png" alt="Jardinea perfume bottle">
+          <div class="card__meta">
+            <div class="card__title">
+              <h3 class="h5">Jardinea</h3>
+              <p class="accent">Strongly Floral</p>
+            </div>
+            <p class="small">$39.95</p>
+          </div>
+          <a class="btn btn--block accent" href="#">Shop now</a>
+        </article>
+        <article class="card">
+          <img class="card__img" src="assets/product-lavanda.png" alt="Lavanda perfume bottle">
+          <div class="card__meta">
+            <div class="card__title">
+              <h3 class="h5">Lavanda</h3>
+              <p class="accent">Calming</p>
+            </div>
+            <p class="small">$39.95</p>
+          </div>
+          <a class="btn btn--block accent" href="#">Shop now</a>
+          <span class="badge accent">On sale</span>
+        </article>
+        <article class="card">
+          <img class="card__img" src="assets/product-neroli.png" alt="Neroli perfume bottle">
+          <div class="card__meta">
+            <div class="card__title">
+              <h3 class="h5">Neroli</h3>
+              <p class="accent">Deep &amp; Sweet</p>
+            </div>
+            <p class="small">$39.95</p>
+          </div>
+          <a class="btn btn--block accent" href="#">Shop now</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Image with text -->
+    <section class="feature" id="about">
+      <img class="feature__img" src="assets/dream.png" alt="">
+      <div class="feature__text">
+        <div class="feature__inner">
+          <h2 class="h2">Smell like a <em>dream</em>.</h2>
+          <p>With every delicate spritz, our scents weave a tapestry of dreams, enveloping you in an irresistible aura that lingers like the sweetest reverie. Each note is meticulously crafted to transport you to a realm where your aspirations come alive, leaving an impression that's as lasting as the memory of a cherished dream.</p>
+          <a class="btn accent" href="#products">Shop now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <section class="marquee" aria-label="Created for everyone">
+      <div class="marquee__track">
+        <div class="marquee__set">
+          <p class="h2">Created for <em>everyone</em>.</p><img src="assets/icon-flower.svg" alt="">
+          <p class="h2">Created for <em>everyone</em>.</p><img src="assets/icon-flower.svg" alt="">
+          <p class="h2">Created for <em>everyone</em>.</p><img src="assets/icon-flower.svg" alt="">
+        </div>
+        <div class="marquee__set" aria-hidden="true">
+          <p class="h2">Created for <em>everyone</em>.</p><img src="assets/icon-flower.svg" alt="">
+          <p class="h2">Created for <em>everyone</em>.</p><img src="assets/icon-flower.svg" alt="">
+          <p class="h2">Created for <em>everyone</em>.</p><img src="assets/icon-flower.svg" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Image with featured icons -->
+    <section class="icons">
+      <div class="icons__text">
+        <h2 class="h2">Safe for you, safe for the <em>earth</em>.</h2>
+        <div class="icons__grid">
+          <div class="icons__item">
+            <img src="assets/icon-sourcing.svg" alt="">
+            <h3 class="accent">Sustainable Sourcing</h3>
+            <p>We meticulously source our ingredients from sustainable and eco-friendly suppliers, ensuring that the delicate balance of nature is preserved.</p>
+          </div>
+          <div class="icons__item">
+            <img src="assets/icon-clean.svg" alt="">
+            <h3 class="accent">Clean Formulations</h3>
+            <p>Our perfumes are crafted using clean and non-toxic ingredients, free from harmful chemicals that could compromise your health or the environment.</p>
+          </div>
+          <div class="icons__item">
+            <img src="assets/icon-packaging.svg" alt="">
+            <h3 class="accent">Minimalist Packaging</h3>
+            <p>Our bottles and boxes are thoughtfully designed to minimize waste, using eco-friendly materials that are both beautiful and sustainable.</p>
+          </div>
+          <div class="icons__item">
+            <img src="assets/icon-cruelty-free.svg" alt="">
+            <h3 class="accent">Cruelty-Free Practices</h3>
+            <p>We are proud to be a cruelty-free brand, never testing our products on animals. Our dedication to safety extends to our furry friends.</p>
+          </div>
+        </div>
+      </div>
+      <img class="feature__img" src="assets/earth.png" alt="">
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <h2 class="h2">Everyone is <em>enchanted</em> by us.</h2>
+      <div class="testimonials__list">
+        <figure class="testimonial" style="margin:0">
+          <div>
+            <div class="stars" role="img" aria-label="5 stars">
+              <img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt="">
+            </div>
+            <blockquote style="margin:0"><p>“In love with these floral perfumes! The scents are balanced, not overpowering, and evoke a sense of serenity. I appreciate their commitment to sustainability too.”</p></blockquote>
+          </div>
+          <figcaption class="testimonial__author">
+            <img src="assets/avatar-samantha.png" alt="" width="48" height="48">
+            <div><span class="h4">Samantha R.</span><span class="accent">Miami, Fl</span></div>
+          </figcaption>
+        </figure>
+        <figure class="testimonial" style="margin:0">
+          <div>
+            <div class="stars" role="img" aria-label="5 stars">
+              <img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt="">
+            </div>
+            <blockquote style="margin:0"><p>“A definite must-have for anyone seeking an enchanting and long-lasting fragrance experience. A true floral symphony in every bottle!”</p></blockquote>
+          </div>
+          <figcaption class="testimonial__author">
+            <img src="assets/avatar-natalie.png" alt="" width="48" height="48">
+            <div><span class="h4">Natalie F.</span><span class="accent">Atlanta, Ga</span></div>
+          </figcaption>
+        </figure>
+        <figure class="testimonial" style="margin:0">
+          <div>
+            <div class="stars" role="img" aria-label="5 stars">
+              <img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt=""><img src="assets/icon-star.svg" alt="">
+            </div>
+            <blockquote style="margin:0"><p>“Delighted to have found a perfume that uplifts my mood and receives compliments wherever I go. The scents are like a bouquet of nature's finest flowers fresh everyday.”</p></blockquote>
+          </div>
+          <figcaption class="testimonial__author">
+            <img src="assets/avatar-jessica.png" alt="" width="48" height="48">
+            <div><span class="h4">Jessica C.</span><span class="accent">Tampa, Fl</span></div>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="slider-controls">
+        <button class="icon-btn" type="button" aria-label="Previous testimonial"><img src="assets/arrow-prev.svg" alt="" width="48" height="48"></button>
+        <button class="icon-btn" type="button" aria-label="Next testimonial"><img src="assets/arrow-next.svg" alt="" width="48" height="48"></button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/icon-flower-footer.svg" alt="">
+        <div class="footer__news">
+          <h3 class="h3">We send <em>great</em> emails.</h3>
+          <div class="signup">
+            <label class="signup__field">
+              <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</span>
+              <input type="email" placeholder="Enter your email" autocomplete="email">
+            </label>
+            <button class="btn btn--white accent" type="button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4 class="h4">Company</h4>
+          <ul>
+            <li><a href="#products">Shop</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">T&amp;C</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4 class="h4">Social</h4>
+          <ul>
+            <li><a href="#">Tiktok</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Youtube</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4 class="h4">Template</h4>
+          <ul>
+            <li><a href="#">Style Guide</a></li>
+            <li><a href="#">Changelog</a></li>
+            <li><a href="#">Licenses</a></li>
+            <li><a href="#">All Templates</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <img class="footer__wordmark" src="assets/footer-wordmark.svg" alt="Parfum">
+    <div class="footer__bottom">
+      <p>Powered by Webflow.</p>
+      <p>Website template by Callisto Digital Studio.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('announcement-close').addEventListener('click', function () {
+    document.getElementById('announcement').hidden = true;
+  });
+</script>
+</body>
+</html>
